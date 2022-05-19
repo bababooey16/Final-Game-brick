@@ -32,7 +32,7 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
     private  boardGen board;
 
     private void randomStart() {
-        Random startRand = new Random();
+        SecureRandom startRand = new SecureRandom();
         randWidth = startRand.nextInt(100, 650);
     }
     public brickBreaker(){
