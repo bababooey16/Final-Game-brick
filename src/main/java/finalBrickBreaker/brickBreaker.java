@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.SecureRandom;
-import java.util.Random;
+
 
 
 public class brickBreaker extends JPanel implements ActionListener, KeyListener {
@@ -33,7 +33,7 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
 
     private void randomStart() {
         SecureRandom startRand = new SecureRandom();
-        randWidth = startRand.nextInt(100, 650);
+        randWidth = startRand.nextInt(10, 650);
     }
     public brickBreaker(){
         board = new boardGen(4,9);
@@ -68,7 +68,7 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
 
         //Paddle
         g.setColor(Color.white);
-        g.fillRect(playerX, 550, 100, 8);
+        g.fillRect(playerX, 550, 60, 8);
 
         //Ball
         g.setColor(Color.white);
@@ -82,7 +82,7 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
             ballYdir = 0;
             g.setColor(Color.RED);
             g.setFont(new Font("serif",Font.BOLD, 30));
-            g.drawString("You Won", 260,300);
+            g.drawString("you Wasted your time", 260,300);
 
             g.setColor(Color.RED);
             g.setFont(new Font("serif",Font.BOLD, 20));
@@ -97,7 +97,8 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
             ballYdir = 0;
             g.setColor(Color.RED);
             g.setFont(new Font("serif",Font.BOLD, 30));
-            g.drawString("Game Over, Score: "+score, 190,300);
+            g.drawString("How did you lose?", 215,300);
+            g.drawString("Score: "+score, 270,327);
 
             g.setColor(Color.RED);
             g.setFont(new Font("serif",Font.BOLD, 20));
@@ -133,11 +134,12 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
             }
         }
 
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) //for restarting game after lose
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) //for restarting game
         {
             if(!play)
             {
                 play = true;
+                randomStart();
                 ballposX = randWidth;
                 ballposY = 350;
                 ballXdir = -1;
@@ -164,7 +166,7 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //intersections for player and ball
+        //collision for player and ball
         timer.start();
         if(play) {
             if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 100, 8)))
