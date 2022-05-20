@@ -12,7 +12,7 @@ import java.security.SecureRandom;
 public class brickBreaker extends JPanel implements ActionListener, KeyListener {
 
 
-    private boolean play = false;
+    private boolean play;
     private int score = 0;
     private int totalbricks = 36;
 
@@ -36,6 +36,7 @@ public class brickBreaker extends JPanel implements ActionListener, KeyListener 
         randWidth = startRand.nextInt(10, 650);
     }
     public brickBreaker(){
+
         board = new boardGen(4,9);
         addKeyListener(this); //key detection
         setFocusable(true);
